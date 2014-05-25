@@ -28,7 +28,9 @@ public class NetworkManager : MonoBehaviour {
 		string tempPlayerString = player.ToString ();
 		int playerNumber = 0;
 		if (int.TryParse (tempPlayerString, out playerNumber)) {
-			Transform newPlayerTransform = (Transform)Network.Instantiate (playerPrefab, transform.position, transform.rotation, playerNumber);
+			Transform newPlayerTransform = (Transform)Network.Instantiate(playerPrefab, 
+			                                                              transform.position + new Vector3(0, 10, 0), 
+			                                                              transform.rotation, playerNumber);
 			playerScripts.Add (newPlayerTransform.GetComponent ("Player"));
 			NetworkView theNetworkView = newPlayerTransform.networkView;
 			theNetworkView.RPC ("setOwner", RPCMode.AllBuffered, player);

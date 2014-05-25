@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+ * Multiplayer Script by RAMIN Alexandre
+ * Point & Click movement
+ * Need Agent engine
+ * */
+using UnityEngine;
 using System.Collections;
 
 public class C_PlayerManager : MonoBehaviour {
