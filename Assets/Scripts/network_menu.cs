@@ -12,37 +12,36 @@ public class network_menu : MonoBehaviour {
 
 	void OnGUI()
 	{
-		if (GUI.Button(new Rect(100, 75, 150, 25), "Refresh Server List")){
-			GUI.Label(new Rect(100, 100, 150, 25), "Refreshing...");
-		}
-		HostData[] data = MasterServer.PollHostList();
-		// Go through all the hosts in the host list
-		foreach (HostData element in data)
-		{
-			GUILayout.BeginHorizontal();	
-			var name = element.gameName + " " + element.connectedPlayers + " / " + element.playerLimit;
-			GUILayout.Label(name);	
-			GUILayout.Space(5);
-			string hostInfo;
-			hostInfo = "[";
-			foreach (string host in element.ip)
-				hostInfo = hostInfo + host + ":" + element.port + " ";
-			hostInfo = hostInfo + "]";
-			GUILayout.Label(hostInfo);	
-			GUILayout.Space(5);
-			GUILayout.Label(element.comment);
-			GUILayout.Space(5);
-			GUILayout.FlexibleSpace();
-			if (GUILayout.Button("Connect"))
-			{
-				// Connect to HostData struct, internally the correct method is used (GUID when using NAT).
-				Network.Connect(element);			
-			}
-			GUILayout.EndHorizontal();	
-		}
-
-
 		if (Network.peerType == NetworkPeerType.Disconnected) {
+			if (GUI.Button(new Rect(100, 75, 150, 25), "Refresh Server List")){
+				GUI.Label(new Rect(100, 100, 150, 25), "Refreshing...");
+			}
+			HostData[] data = MasterServer.PollHostList();
+			// Go through all the hosts in the host list
+			foreach (HostData element in data)
+			{
+				GUILayout.BeginHorizontal();	
+				var name = element.gameName + " " + element.connectedPlayers + " / " + element.playerLimit;
+				GUILayout.Label(name);	
+				GUILayout.Space(5);
+				string hostInfo;
+				hostInfo = "[";
+				foreach (string host in element.ip)
+					hostInfo = hostInfo + host + ":" + element.port + " ";
+				hostInfo = hostInfo + "]";
+				GUILayout.Label(hostInfo);	
+				GUILayout.Space(5);
+				GUILayout.Label(element.comment);
+				GUILayout.Space(5);
+				GUILayout.FlexibleSpace();
+				if (GUILayout.Button("Connect"))
+				{
+					// Connect to HostData struct, internally the correct method is used (GUID when using NAT).
+					Network.Connect(element);			
+				}
+				GUILayout.EndHorizontal();	
+			}
+
 			if (GUI.Button(new Rect(100, 100, 100, 25), "Connect to server")){
 				Network.Connect(_ip, _port);
 			}
@@ -50,7 +49,7 @@ public class network_menu : MonoBehaviour {
 				Network.InitializeServer(10, _port, true);
 				MasterServer.RegisterHost("Luck4Fun", "WARBIRs game", "l33t game for all");
 			}
-		} else {
+		} /*else {
 			if (Network.peerType == NetworkPeerType.Client) {
 				GUI.Label(new Rect(100, 100, 150, 25), "Connected to server");
 
@@ -66,7 +65,7 @@ public class network_menu : MonoBehaviour {
 					Network.Disconnect(250);
 				}
 			}
-		}
+		}*/
 		if (GUI.Button(new Rect(100, 300, 150, 25), "Quit Game")){
 			Application.Quit();
 		}

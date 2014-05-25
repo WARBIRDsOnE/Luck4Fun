@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class NetworkManager : MonoBehaviour {
-
 	public Transform playerPrefab;
 	public ArrayList playerScripts = new ArrayList();
 	
