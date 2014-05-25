@@ -5,6 +5,7 @@ public class C_PlayerManager : MonoBehaviour {
 	//That's actually not the owner but the player,
 	//the server instantiated the prefab for, where this script is attached
 	private NetworkPlayer owner;
+	public GameObject camera;
 	
 	//Those are stored to only send RPCs to the server when the 
 	//data actually changed.
@@ -24,9 +25,9 @@ public class C_PlayerManager : MonoBehaviour {
 		}
 		else {
 			//Disable a bunch of other things here that are not interesting:
-			if (GetComponent<Camera>()) {
-				GetComponent<Camera>().enabled = false;
-			}
+			//camera.camera.enabled = false;
+			//camera.SetActive(false);
+			GetComponentInChildren<Camera>().enabled = false;
 			
 			if (GetComponent<AudioListener>()) {
 				GetComponent<AudioListener>().enabled = false;
@@ -54,24 +55,31 @@ public class C_PlayerManager : MonoBehaviour {
 	
 	public void Update () {
 		if (Network.isServer) {
+			if ((owner != null) && (Network.player == owner)) {
+				if (Input.GetMouseButtonDown(0)) {
+					lastClientMInput = Input.mousePosition;
+					RaycastHit hit;
+					Ray ray = camera.camera.ScreenPointToRay(lastClientMInput);
+					if (Physics.Raycast(ray, out hit))
+					{
+						PlayerManager pm = GetComponent<PlayerManager>();
+						pm.updateClientMotion(hit.point);
+					}
+				}
+			}
 			return; //get lost, this is the client side!
 		}
 		//Check if this update applies for the current client
 		if ((owner != null) && (Network.player == owner)) {
 			if (Input.GetMouseButtonDown(0)) {
 				lastClientMInput = Input.mousePosition;
-				networkView.RPC("updateClientMotion", RPCMode.Server, lastClientMInput);
+				RaycastHit hit;
+				Ray ray = camera.camera.ScreenPointToRay(lastClientMInput);
+				if (Physics.Raycast(ray, out hit))
+				{
+					networkView.RPC("updateClientMotion", RPCMode.Server, hit.point);
+				}
 			}
-			/*float motionH = Input.GetAxis("Horizontal");
-			float motionV = Input.GetAxis("Vertical");
-			if ((motionH != lastMotionH) || (motionV != lastMotionV)) {
-				networkView.RPC("updateClientMotion", 
-				                RPCMode.Server, 
-				                Input.GetAxis("Horizontal"), 
-				                Input.GetAxis("Vertical"));
-				lastMotionH = motionH;
-				lastMotionV = motionV;
-			}*/
 		}
 	}
 }

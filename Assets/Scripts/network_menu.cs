@@ -12,6 +12,9 @@ public class network_menu : MonoBehaviour {
 
 	void OnGUI()
 	{
+		if (GUI.Button(new Rect(100, 75, 150, 25), "Refresh Server List")){
+			GUI.Label(new Rect(100, 100, 150, 25), "Refreshing...");
+		}
 		HostData[] data = MasterServer.PollHostList();
 		// Go through all the hosts in the host list
 		foreach (HostData element in data)
@@ -37,6 +40,8 @@ public class network_menu : MonoBehaviour {
 			}
 			GUILayout.EndHorizontal();	
 		}
+
+
 		if (Network.peerType == NetworkPeerType.Disconnected) {
 			if (GUI.Button(new Rect(100, 100, 100, 25), "Connect to server")){
 				Network.Connect(_ip, _port);

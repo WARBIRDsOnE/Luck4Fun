@@ -15,18 +15,10 @@ Platform assembly: C:\Users\WARBIRDs OnE\Documents\Luck4Fun\L4F_Data\Managed\Ass
 Loading C:\Users\WARBIRDs OnE\Documents\Luck4Fun\L4F_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\WARBIRDs OnE\Documents\Luck4Fun\L4F_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
 Loading C:\Users\WARBIRDs OnE\Documents\Luck4Fun\L4F_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
-- Completed reload, in  0.033 seconds
+- Completed reload, in  0.034 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Received pong from 25.175.127.55:19604
- 
-(Filename:  Line: 831)
-
-Received pong from 192.168.1.23:19604
- 
-(Filename:  Line: 831)
-
 Setting the owner.
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
@@ -34,12 +26,4 @@ Setting the owner.
 Setting the owner.
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-The server has disconnected from the client. Most likely the server has shut down.
- 
-(Filename:  Line: 740)
-
-Can't send RPC function since no connection was started.
- 
-(Filename:  Line: 2458)
 

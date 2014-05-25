@@ -29,17 +29,14 @@ public class PlayerManager : MonoBehaviour {
 			horizontalMotion * speed * Time.deltaTime, 
 			0, 
 			verticalMotion * speed * Time.deltaTime));*/
-
+		/*if (Input.GetMouseButtonDown(0)) {
+			serverCurrentMInput = Input.mousePosition;;
+			mouseIsClick = true;
+		}*/
 		if (mouseIsClick)
 		{
-			RaycastHit hit;
-			Ray ray = camera.camera.ScreenPointToRay(serverCurrentMInput);
-			if (Physics.Raycast(ray, out hit))
-				if (transform.position != hit.point)
-			{
-				agent.SetDestination(hit.point);
-				mouseIsClick = false;
-			}
+			agent.SetDestination(serverCurrentMInput);
+			mouseIsClick = false;
 		}
 	}
 	
